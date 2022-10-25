@@ -14,5 +14,5 @@ Following is a working theory of how the script will function:
   * Pull list of VODs/highlights for channel `<x>` (optionally add an `--initial` flag to pull a full VOD list or a high limit like 100 videos. Default experience should be looking at the past 24-48h depending on the schedule interval)
     * Iterate through list of VODs, downloading the VOD then the associated chat. Upon confirmed completion of each download step, write VOD ID to a permanent log file. At beginning of this stage, we'll cross-check against said log and ignore any VODs/chats that have already been downloaded.
   * Pull list of available clips for channel `<x>`
-    * Iterate through list of VODs, cross-checking permanent log file so that we may ignore clips already downloaded. As new clips and associated chats (if available) are downloaded, write the clip ID to permanent log to confirm completion.
+    * Iterate through list of clips, cross-checking permanent log file so that we may ignore clips already downloaded. As new clips and associated chats (if available) are downloaded, write the clip ID to permanent log to confirm completion.
 * Rinse and repeat for each channel until the list of channel ID's has been exhausted for this run. Shut down script until the next cycle.
