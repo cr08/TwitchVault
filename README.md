@@ -16,3 +16,8 @@ Following is a working theory of how the script will function:
   * Pull list of available clips for channel `<x>`
     * Iterate through list of clips, cross-checking permanent log file so that we may ignore clips already downloaded. As new clips and associated chats (if available) are downloaded, write the clip ID to permanent log to confirm completion.
 * Rinse and repeat for each channel until the list of channel ID's has been exhausted for this run. Shut down script until the next cycle.
+
+Channel ID writer/validator: Since most tools expect a numerical channel ID number instead of a channel name, adding extra functionality for user-friendliness:
+
+* `--channels name1,name2,name3,... <--chanvod> <--chanclip>` 
+  * Takes a comma separated list of channel names, runs internal function to translate the channel name to channel ID. `--chanvod` and `--chanclip` are used to indicate what channel ID lists to automatically insert these into for the main script. If neither are included in the command, print the channel names and IDs to stdout.
