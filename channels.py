@@ -7,11 +7,11 @@ configfile = "config.ini"
 config = configparser.ConfigParser()
 config.read(configfile)
 
-URL = "https://id.twitch.tv/oauth2/token"
+oauth_url = "https://id.twitch.tv/oauth2/token"
 clientid = config.get('twitch','clientid')
 secret = config.get('twitch','secret')
 
-r1 = requests.post(url = URL, data={'client_id':clientid,'client_secret':secret,'grant_type':"client_credentials"})
+r1 = requests.post(url = oauth_url, data={'client_id':clientid,'client_secret':secret,'grant_type':"client_credentials"})
 
 token = r1.json()["access_token"]
 
@@ -22,20 +22,21 @@ headers = {
 
 vod_chans = config.items('vod_chan')
 for key, value in vod_chans:
-#    print(key)
-#    print(value)
 
     stream = requests.get('https://api.twitch.tv/helix/streams?user_id=' + value, headers=headers)
     streamj = stream.json()
 
-    #print("lol")
-    #print(streamj)
+    videos = requests.get('https://api.twitch.tv/helix/videos?user_id=' + value + '&period=week', headers=headers)
+    videosj = videos.json()
 
-    if streamj['data'][0].get('id'):
-        print(streamj['data'][0])
-        print(streamj['data'][0]['id'])
+    # Determine if stream is currently live so we can omit it's ID from the VOD list so not to download a partial stream
+    if streamj['data']:
+        print('Stream: ' + streamj['data'][0]['id'])
+
+        print('Videos: ' + videosj['data'][0]['stream_id'])
+
     else:
-        print('Offline')
+        print('Stream: Offline')
 
 
 
