@@ -1,0 +1,11 @@
+[twitch]
+clientid = 1234567890
+secret = 1234567890
+
+[vod_chan]
+yogscast = 20786541
+
+
+[clip_chan]
+yogscast = 20786541
+
