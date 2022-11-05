@@ -215,7 +215,7 @@ for idx, user in enumerate(users):
         file_bad = file_path_chat + ".BAD"
         file_path_chat_tmp = path_temp + str(video['helix']['id']) + "_chat.json"
         print("\t- download chat: " + file_path_chat)
-        if not utils.terminated_requested and (not os.path.exists(file_path_chat) or not utils.checkBadChat(video['id'], "clips", badchat_log)):
+        if not utils.terminated_requested and (not os.path.exists(file_path_chat) or not utils.checkBadChat(video['helix']['id'], "clips", badchat_log)):
             t0 = time.time()
             cmd = path_twitch_cli + ' -m ChatDownload' \
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
