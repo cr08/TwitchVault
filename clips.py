@@ -198,7 +198,6 @@ for idx, user in enumerate(users):
             file_path_chat = path_data + str(video['created_at'].strftime('%Y%m%d T%H%M%SZ')) + " - " + str(video['id']) + " - " + utils.cleanFilename(str(video['title']))  + "_clip_chat.json"
             file_bad = file_path_chat + ".BAD"
             file_path_chat_tmp = path_temp + str(video['id']) + "_chat.json"
-            utils.checkBadChat(video['id'], clips, badchat_log)
             if utils.checkBadChat(video['id'], "clips", badchat_log) or os.path.exists(file_path_chat):
                 print("\t- chat file exists - Skipping Chat download")
             else:
