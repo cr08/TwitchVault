@@ -46,6 +46,7 @@ ffmpeg_path = shutil.which('ffmpeg')
 tdcli = conf["twitchdownloader"]
 path_twitch_cli = path_base + tdcli
 path_root = videos["video_downloads"]
+badchat_log = videos["video_downloads"] + "badchat.videos"
 path_temp = videos["video_temp"]
 path_model = path_base + "/thirdparty/vosk-model-small-en-us-0.15/"
 
@@ -214,7 +215,7 @@ for idx, user in enumerate(users):
         file_bad = file_path_chat + ".BAD"
         file_path_chat_tmp = path_temp + str(video['helix']['id']) + "_chat.json"
         print("\t- download chat: " + file_path_chat)
-        if not utils.terminated_requested and not os.path.exists(file_path_chat):
+        if not utils.terminated_requested and (not os.path.exists(file_path_chat) or not utils.checkBadChat(video['id'], "clips", badchat_log)):
             t0 = time.time()
             cmd = path_twitch_cli + ' -m ChatDownload' \
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
@@ -239,8 +240,9 @@ for idx, user in enumerate(users):
                 proc.wait()
                 if proc.returncode != 0:
                     print("ERR: Clip has no chat. Either nothing was said or the source VOD is no longer available. Inserting placeholder.")               
-                    with open(file_bad, 'w') as fp:
-                        fp.write("No chat log for this clip. Either nothing was said or the source VOD is no longer available.")
+                    with open(badchat_log, 'a') as fp:
+                        fp.write(str(video['id']))
+                        fp.write('\n')
                 else:
                     print("GOOD: File moved")
                     if os.path.exists(file_path_chat_tmp):
@@ -393,7 +395,7 @@ for idx, user in enumerate(users):
         file_bad = file_path_chat + ".BAD"
         file_path_chat_tmp = path_temp + str(video['helix']['id']) + "_chat.json"
         print("\t- download chat: " + file_path_chat)
-        if not utils.terminated_requested and not os.path.exists(file_path_chat):
+        if not utils.terminated_requested and (not os.path.exists(file_path_chat) or not utils.checkBadChat(video['id'], "clips", badchat_log)):
             t0 = time.time()
             cmd = path_twitch_cli + ' -m ChatDownload' \
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
@@ -409,8 +411,9 @@ for idx, user in enumerate(users):
             proc.wait()
             if proc.returncode != 0:
                 print("ERR: Clip has no chat. Either nothing was said or the source VOD is no longer available. Inserting placeholder.")               
-                with open(file_bad, 'w') as fp:
-                    fp.write("No chat log for this clip. Either nothing was said or the source VOD is no longer available.")
+                with open(badchat_log, 'a') as fp:
+                    fp.write(str(video['id']))
+                    fp.write('\n')
             else:
                 print("GOOD: File moved")
                 if os.path.exists(file_path_chat_tmp):
@@ -555,7 +558,7 @@ for idx, user in enumerate(users):
         file_bad = file_path_chat + ".BAD"
         file_path_chat_tmp = path_temp + str(video['helix']['id']) + "_chat.json"
         print("\t- download chat: " + file_path_chat)
-        if not utils.terminated_requested and not os.path.exists(file_path_chat):
+        if not utils.terminated_requested and (not os.path.exists(file_path_chat) or not utils.checkBadChat(video['id'], "clips", badchat_log)):
             t0 = time.time()
             cmd = path_twitch_cli + ' -m ChatDownload' \
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
@@ -580,8 +583,9 @@ for idx, user in enumerate(users):
                 proc.wait()
                 if proc.returncode != 0:
                     print("ERR: Clip has no chat. Either nothing was said or the source VOD is no longer available. Inserting placeholder.")               
-                    with open(file_bad, 'w') as fp:
-                        fp.write("No chat log for this clip. Either nothing was said or the source VOD is no longer available.")
+                    with open(badchat_log, 'a') as fp:
+                        fp.write(str(video['id']))
+                        fp.write('\n')
                 else:
                     print("GOOD: File moved")
                     if os.path.exists(file_path_chat_tmp):

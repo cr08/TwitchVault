@@ -1,4 +1,5 @@
 # Import general libraries
+import os
 import sys
 import json
 import signal
@@ -186,3 +187,26 @@ def send_pushover_message(auth, text):
 
 def cleanFilename(sourcestring,  removestring ="/<>\:\"\\|?*"):
     return ''.join([c for c in sourcestring if c not in removestring])
+
+def checkBadChat(id, type, path):
+    if type == "videos":
+        fpath = path
+        if os.path.exists(fpath):
+            with open(fpath) as f:
+                if id in f.read():
+                    return True
+                else:
+                    return False
+        else:
+            return False
+            
+    elif type == "clips":
+        fpath = path
+        if os.path.exists(fpath):
+            with open(path) as f:
+                if id in f.read():
+                    return True
+                else:
+                    return False
+        else:
+            return False

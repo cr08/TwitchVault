@@ -49,6 +49,7 @@ ffmpeg_path = shutil.which('ffmpeg')
 tdcli = conf["twitchdownloader"]
 path_twitch_cli = path_base + tdcli
 path_root = clips["clip_downloads"]
+badchat_log = clips["clip_downloads"] + "badchat.clips"
 path_temp = clips["clip_temp"]
 
 # ================================================================
@@ -197,7 +198,8 @@ for idx, user in enumerate(users):
             file_path_chat = path_data + str(video['created_at'].strftime('%Y%m%d T%H%M%SZ')) + " - " + str(video['id']) + " - " + utils.cleanFilename(str(video['title']))  + "_clip_chat.json"
             file_bad = file_path_chat + ".BAD"
             file_path_chat_tmp = path_temp + str(video['id']) + "_chat.json"
-            if os.path.exists(file_bad) or os.path.exists(file_path_chat):
+            utils.checkBadChat(video['id'], clips, badchat_log)
+            if utils.checkBadChat(video['id'], "clips", badchat_log) or os.path.exists(file_path_chat):
                 print("\t- chat file exists - Skipping Chat download")
             else:
                 if not utils.terminated_requested:
@@ -212,8 +214,9 @@ for idx, user in enumerate(users):
                     proc.wait()
                     if proc.returncode != 0:
                         print("\t- ERR: Clip has no chat. Either nothing was said or the source VOD is no longer available. Inserting placeholder.")               
-                        with open(file_bad, 'w') as fp:
-                            fp.write("No chat log for this clip. Either nothing was said or the source VOD is no longer available.")
+                        with open(badchat_log, 'a') as fp:
+                            fp.write(str(video['id']))
+                            fp.write('\n')
                     else:
                         print("\t- GOOD: File moved")
                         shutil.move(file_path_chat_tmp, file_path_chat)
