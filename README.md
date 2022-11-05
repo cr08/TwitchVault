@@ -7,7 +7,7 @@ My personal goal has been to find or develop a tool that can not only automate a
 ## Install Guide
 0) Ensure __Python 3.6__ minimum is installed.
 1) Clone this repository:
-    * `git clone https://github.com/cr08/twitch_vod_creator`
+    * `git clone https://github.com/cr08/TwitchVault`
 2) Install main python depencies:
     * `python3 -m pip install --user -r requirements.txt`
 3) Download and place [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader/releases) for your platform into __/thirdparty__
