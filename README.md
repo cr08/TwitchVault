@@ -4,20 +4,31 @@ Simplified tool to automatically archive VODs, clips, highlights, including asso
 ## Concept
 My personal goal has been to find or develop a tool that can not only automate archiving the latest VODs, clips, and highlights from selected Twitch channels, but also archiving the chat logs as they are available for each medium.
 
-So far in my nearly exhaustive search I have been unable to find a tool that can check all the boxes and do so in an automated fashion. Now the plan is to try and develop something to meet these needs.
-## WIP/planning stage
-Currently I intend to either write the script in a shell/bash script or python depending on complexity and third party tool use.
+## Install Guide
+0) Ensure __Python 3.6__ minimum is installed.
+1) Clone this repository:
+    * `git clone https://github.com/cr08/twitch_vod_creator`
+2) Install main python depencies:
+    * `python3 -m pip install --user -r requirements.txt`
+3) Download and place [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader/releases) for your platform into __/thirdparty__
+    * Latest release recommended, minimum __1.50.6__ required as it fixes a chat download issue
+    * Ensure TwitchDownloaderCLI is set as executable. This may be necessary on \*nix platforms
+        * `chmod +x thirdparty/TwitchDownloaderCLI`
+4) Copy and fill out all __config/\*.yaml.example__ files as necessary.
+    * An application needs to be registered with Twitch from the [Twitch Dev console](https://dev.twitch.tv/) - client ID and secret need to be entered into __config/config.yaml__
+5) Run scripts as desired:
+    * `python3 videos.py`
+    * `python3 clips.py`
+6) __Optional__ - Linux targets: Add scripts to crontab using __docs/crontab_script_launcher.sh__
+    * `sudo crontab -e`
+    * ```
+      */25 * * * * /path/to/repo/docs/crontab_script_launcher.sh videos.py
+      * */12 * * * /path/to/repo/docs/crontab_script_launcher.sh clips.py
+      ```
 
-Following is a working theory of how the script will function:
+### Known Issues
+* VTT render produces files with a single word displayed at a time (at least as played via VLC). This needs to be fixed. I may just switch this to SRT as Vosk can natively output this and hopefully it outputs correctly. More testing needed here...
 
-* Script startup: Read out file containing list of channel ID's
-  * Pull list of VODs/highlights for channel `<x>` (optionally add an `--initial` flag to pull a full VOD list or a high limit like 100 videos. Default experience should be looking at the past 24-48h depending on the schedule interval)
-    * Iterate through list of VODs, downloading the VOD then the associated chat. Upon confirmed completion of each download step, write VOD ID to a permanent log file. At beginning of this stage, we'll cross-check against said log and ignore any VODs/chats that have already been downloaded.
-  * Pull list of available clips for channel `<x>`
-    * Iterate through list of clips, cross-checking permanent log file so that we may ignore clips already downloaded. As new clips and associated chats (if available) are downloaded, write the clip ID to permanent log to confirm completion.
-* Rinse and repeat for each channel until the list of channel ID's has been exhausted for this run. Shut down script until the next cycle.
+## Credit & Attribution
 
-Channel ID writer/validator: Since most tools expect a numerical channel ID number instead of a channel name, adding extra functionality for user-friendliness:
-
-* `--channels name1,name2,name3,... <--chanvod> <--chanclip>` 
-  * Takes a comma separated list of channel names, runs internal function to translate the channel name to channel ID. `--chanvod` and `--chanclip` are used to indicate what channel ID lists to automatically insert these into for the main script. If neither are included in the command, print the channel names and IDs to stdout.
+This repo has been heavily modified from [goldbattle's](https://github.com/goldbattle) [Twitch VOD Creator](https://github.com/goldbattle/twitch_vod_creator) - All credit and attribution as well as a huge amount of thanks goes out to them for creating the core functionality of automatically retrieving the requisite content from Twitch.

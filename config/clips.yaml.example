@@ -1,0 +1,9 @@
+channels: [yogscast, ar_comm, ferdam_lol]
+min_view_counts: [100, 200, 100]
+
+# number of days to try to request
+num_days_to_query: 20
+
+# fill in base paths used to store downloaded videos and temp files
+clip_downloads: "~/Videos/twitch_clips/"
+clip_temp: "~/Videos/.tv_clips_temp/"

@@ -1,2 +1,14 @@
-config.ini
-*.json
+
+# YAML config files
+config/*.yaml
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# data folder during debugging
+data/
+
+# ignore TwitchDownloaderCLI files - Don't want these stored in the repo any longer
+thirdparty/TwitchDownloaderCLI*

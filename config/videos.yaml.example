@@ -1,0 +1,8 @@
+channels: [yogscast, ar_comm, ferdam_lol]
+max_videos: 60
+render_chat: [False, False, True]
+render_webvtt: [False, True, False]
+
+# fill in base paths used to store downloaded videos and temp files
+video_downloads: "~/Videos/twitch_videos/"
+video_temp: "~/Videos/.tv_videos_temp/"
