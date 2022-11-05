@@ -215,7 +215,7 @@ for idx, user in enumerate(users):
         file_bad = file_path_chat + ".BAD"
         file_path_chat_tmp = path_temp + str(video['helix']['id']) + "_chat.json"
         print("\t- download chat: " + file_path_chat)
-        if not utils.terminated_requested and (not os.path.exists(file_path_chat) or not utils.checkBadChat(video['helix']['id'], "clips", badchat_log)):
+        if not utils.terminated_requested and (not os.path.exists(file_path_chat) or utils.checkBadChat(video['helix']['id'], "clips", badchat_log)):
             t0 = time.time()
             cmd = path_twitch_cli + ' -m ChatDownload' \
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
@@ -230,31 +230,14 @@ for idx, user in enumerate(users):
             proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             proc.wait()
             if proc.returncode != 0:
-                print("ERR: Chat could not download. It may have some missing emojis we cannot embed. Trying without...")               
-                cmd = path_twitch_cli + ' -m ChatDownload' \
-                  + ' --ffmpeg-path "' + ffmpeg_path + '"' \
-                  + ' --id ' + str(video['helix']['id']) \
-                  + ' -o ' + file_path_chat_tmp
-                # print("CMD: " + str(cmd))
-                proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                proc.wait()
-                if proc.returncode != 0:
-                    print("ERR: Clip has no chat. Either nothing was said or the source VOD is no longer available. Inserting placeholder.")               
-                    with open(badchat_log, 'a') as fp:
-                        fp.write(str(video['id']))
-                        fp.write('\n')
-                else:
-                    print("GOOD: File moved")
-                    if os.path.exists(file_path_chat_tmp):
-                        shutil.move(file_path_chat_tmp, file_path_chat)
+                print("ERR: Clip has no chat. Either nothing was said or the source VOD is no longer available. Inserting placeholder.")               
+                with open(badchat_log, 'a') as fp:
+                    fp.write(str(video['id']))
+                    fp.write('\n')
             else:
                 print("GOOD: File moved")
                 if os.path.exists(file_path_chat_tmp):
                     shutil.move(file_path_chat_tmp, file_path_chat)
-
-
-            if os.path.exists(file_path_chat_tmp):
-                shutil.move(file_path_chat_tmp, file_path_chat) 
             print("\t- done in " + str(time.time() - t0) + " seconds")
 
         # AUDIO-TO-TEXT: check if file exists
@@ -395,7 +378,7 @@ for idx, user in enumerate(users):
         file_bad = file_path_chat + ".BAD"
         file_path_chat_tmp = path_temp + str(video['helix']['id']) + "_chat.json"
         print("\t- download chat: " + file_path_chat)
-        if not utils.terminated_requested and (not os.path.exists(file_path_chat) or not utils.checkBadChat(video['helix']['id'], "clips", badchat_log)):
+        if not utils.terminated_requested and (not os.path.exists(file_path_chat) or utils.checkBadChat(video['helix']['id'], "clips", badchat_log)):
             t0 = time.time()
             cmd = path_twitch_cli + ' -m ChatDownload' \
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
@@ -558,7 +541,7 @@ for idx, user in enumerate(users):
         file_bad = file_path_chat + ".BAD"
         file_path_chat_tmp = path_temp + str(video['helix']['id']) + "_chat.json"
         print("\t- download chat: " + file_path_chat)
-        if not utils.terminated_requested and (not os.path.exists(file_path_chat) or not utils.checkBadChat(video['helix']['id'], "clips", badchat_log)):
+        if not utils.terminated_requested and (not os.path.exists(file_path_chat) or utils.checkBadChat(video['helix']['id'], "clips", badchat_log)):
             t0 = time.time()
             cmd = path_twitch_cli + ' -m ChatDownload' \
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
@@ -573,23 +556,10 @@ for idx, user in enumerate(users):
             proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             proc.wait()
             if proc.returncode != 0:
-                print("ERR: Chat could not download. It may have some missing emojis we cannot embed. Trying without...")               
-                cmd = path_twitch_cli + ' -m ChatDownload' \
-                  + ' --ffmpeg-path "' + ffmpeg_path + '"' \
-                  + ' --id ' + str(video['helix']['id']) \
-                  + ' -o ' + file_path_chat_tmp
-                # print("CMD: " + str(cmd))
-                proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                proc.wait()
-                if proc.returncode != 0:
-                    print("ERR: Clip has no chat. Either nothing was said or the source VOD is no longer available. Inserting placeholder.")               
-                    with open(badchat_log, 'a') as fp:
-                        fp.write(str(video['id']))
-                        fp.write('\n')
-                else:
-                    print("GOOD: File moved")
-                    if os.path.exists(file_path_chat_tmp):
-                        shutil.move(file_path_chat_tmp, file_path_chat)
+                print("ERR: Clip has no chat. Either nothing was said or the source VOD is no longer available. Inserting placeholder.")               
+                with open(badchat_log, 'a') as fp:
+                    fp.write(str(video['id']))
+                    fp.write('\n')
             else:
                 print("GOOD: File moved")
                 if os.path.exists(file_path_chat_tmp):
