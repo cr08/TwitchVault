@@ -204,7 +204,7 @@ for idx, user in enumerate(users):
             cmd = path_twitch_cli + ' -m VideoDownload' \
                   + ' --id ' + str(video['helix']['id']) + ' --ffmpeg-path "' + ffmpeg_path + '"' \
                   + ' --temp-path "' + path_temp + '" -o "' + file_path + '"'
-            print("CMD: " + str(cmd))
+            # print("CMD: " + str(cmd))
             subprocess.Popen(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).wait()
             # subprocess.Popen(cmd, shell=True).wait()
             print("\t- done in " + str(time.time() - t0) + " seconds")
@@ -220,7 +220,7 @@ for idx, user in enumerate(users):
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
                   + ' --id ' + str(video['helix']['id']) + ' --embed-emotes' \
                   + ' -o ' + file_path_chat_tmp
-            print("CMD: " + str(cmd))
+            # print("CMD: " + str(cmd))
             # Attempt to download chat log. If the first attempt with emojis embedded fails, try again without emojis. TDCLI will error out
             #   there's issues with downloading emojis. We'd rather download the log without them than fail entirely.
             #
@@ -234,7 +234,7 @@ for idx, user in enumerate(users):
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
                   + ' --id ' + str(video['helix']['id']) \
                   + ' -o ' + file_path_chat_tmp
-                print("CMD: " + str(cmd))
+                # print("CMD: " + str(cmd))
                 proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 proc.wait()
                 if proc.returncode != 0:
@@ -383,7 +383,7 @@ for idx, user in enumerate(users):
             cmd = path_twitch_cli + ' -m VideoDownload' \
                   + ' --id ' + str(video['helix']['id']) + ' --ffmpeg-path "' + ffmpeg_path + '"' \
                   + ' --temp-path "' + path_temp + '" -o "' + file_path + '"'
-            print("CMD: " + str(cmd))
+            # print("CMD: " + str(cmd))
             subprocess.Popen(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).wait()
             # subprocess.Popen(cmd, shell=True).wait()
             print("\t- done in " + str(time.time() - t0) + " seconds")
@@ -399,7 +399,7 @@ for idx, user in enumerate(users):
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
                   + ' --id ' + str(video['helix']['id']) + ' --embed-emotes' \
                   + ' -o ' + file_path_chat_tmp
-            print("CMD: " + str(cmd))
+            # print("CMD: " + str(cmd))
             # Attempt to download chat log. If the first attempt with emojis embedded fails, try again without emojis. TDCLI will error out
             #   there's issues with downloading emojis. We'd rather download the log without them than fail entirely.
             #
@@ -545,7 +545,7 @@ for idx, user in enumerate(users):
             cmd = path_twitch_cli + ' -m VideoDownload' \
                   + ' --id ' + str(video['helix']['id']) + ' --ffmpeg-path "' + ffmpeg_path + '"' \
                   + ' --temp-path "' + path_temp + '" -o "' + file_path + '"'
-            print("CMD: " + str(cmd))
+            # print("CMD: " + str(cmd))
             subprocess.Popen(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).wait()
             # subprocess.Popen(cmd, shell=True).wait()
             print("\t- done in " + str(time.time() - t0) + " seconds")
@@ -561,7 +561,7 @@ for idx, user in enumerate(users):
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
                   + ' --id ' + str(video['helix']['id']) + ' --embed-emotes' \
                   + ' -o ' + file_path_chat_tmp
-            print("CMD: " + str(cmd))
+            # print("CMD: " + str(cmd))
             # Attempt to download chat log. If the first attempt with emojis embedded fails, try again without emojis. TDCLI will error out
             #   there's issues with downloading emojis. We'd rather download the log without them than fail entirely.
             #
@@ -575,7 +575,7 @@ for idx, user in enumerate(users):
                   + ' --ffmpeg-path "' + ffmpeg_path + '"' \
                   + ' --id ' + str(video['helix']['id']) \
                   + ' -o ' + file_path_chat_tmp
-                print("CMD: " + str(cmd))
+                # print("CMD: " + str(cmd))
                 proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 proc.wait()
                 if proc.returncode != 0:
