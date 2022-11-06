@@ -232,7 +232,7 @@ for idx, user in enumerate(users):
             if proc.returncode != 0:
                 print("ERR: Clip has no chat. Either nothing was said or the source VOD is no longer available. Inserting placeholder.")               
                 with open(badchat_log, 'a') as fp:
-                    fp.write(str(video['id']))
+                    fp.write(str(video['helix']['id']))
                     fp.write('\n')
             else:
                 print("GOOD: File moved")
@@ -395,7 +395,7 @@ for idx, user in enumerate(users):
             if proc.returncode != 0:
                 print("ERR: Clip has no chat. Either nothing was said or the source VOD is no longer available. Inserting placeholder.")               
                 with open(badchat_log, 'a') as fp:
-                    fp.write(str(video['id']))
+                    fp.write(str(video['helix']['id']))
                     fp.write('\n')
             else:
                 print("GOOD: File moved")
@@ -558,7 +558,7 @@ for idx, user in enumerate(users):
             if proc.returncode != 0:
                 print("ERR: Clip has no chat. Either nothing was said or the source VOD is no longer available. Inserting placeholder.")               
                 with open(badchat_log, 'a') as fp:
-                    fp.write(str(video['id']))
+                    fp.write(str(video['helix']['id']))
                     fp.write('\n')
             else:
                 print("GOOD: File moved")
