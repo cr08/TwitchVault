@@ -13,6 +13,7 @@ from datetime import datetime
 import utils
 import time
 import shutil
+import sys
 
 # importing static-ffmpeg and pre-downloading
 import static_ffmpeg
@@ -241,7 +242,7 @@ for idx, user in enumerate(users):
             print("\t- done in " + str(time.time() - t0) + " seconds")
 
         # AUDIO-TO-TEXT: check if file exists
-        file_path_webvtt = path_data + export_folder + filename_format + ".vtt"
+        file_path_webvtt = path_data + export_folder + filename_format + ".srt"
         if not utils.terminated_requested and os.path.exists(file_path) and not os.path.exists(file_path_webvtt) and render_webvtt[idx]:
             print("\t- transcribing: " + file_path_webvtt)
             t0 = time.time()
@@ -249,36 +250,19 @@ for idx, user in enumerate(users):
             # open the model
             SetLogLevel(-1)
             sample_rate = 16000
+            # words_per_line = 7
             model = Model(path_model)
             rec = KaldiRecognizer(model, sample_rate)
             rec.SetWords(True)
 
-            # open ffmpeg pipe stream of the audio file (from video)
-            command = ['ffmpeg', '-nostdin', '-loglevel', 'quiet', '-i', file_path,
-                       '-ar', str(sample_rate), '-ac', '1', '-f', 's16le', '-']
-            # process = subprocess.Popen(command, stdout=subprocess.PIPE)
-            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-            results = []
-            while True:
-                data = process.stdout.read(4000)
-                if len(data) == 0:
-                    break
-                if rec.AcceptWaveform(data):
-                    text = rec.Result()
-                    results.append(text)
-            results.append(rec.FinalResult())
+            with subprocess.Popen(["ffmpeg", "-loglevel", "quiet", "-i",
+                            file_path,
+                            "-ar", str(sample_rate) , "-ac", "1", "-f", "s16le", "-"],
+                            stdout=subprocess.PIPE).stdout as stream:
 
-            # convert to standard format
-            vtt = WebVTT()
-            for i, res in enumerate(results):
-                words = json.loads(res).get('result')
-                if not words:
-                    continue
-                for word in words:
-                    start = utils.webvtt_time_string(word['start'])
-                    end = utils.webvtt_time_string(word['end'])
-                    vtt.captions.append(Caption(start, end, word['word']))
-            vtt.save(file_path_webvtt)
+                with open(file_path_webvtt, 'w') as f:
+                    f.write(rec.SrtResult(stream))
+            
             print("\t- done in " + str(time.time() - t0) + " seconds")
 
             # send pushover that this twitch vod is ready to edit
@@ -404,7 +388,7 @@ for idx, user in enumerate(users):
             print("\t- done in " + str(time.time() - t0) + " seconds")
 
         # AUDIO-TO-TEXT: check if file exists
-        file_path_webvtt = path_data + export_folder + filename_format + ".vtt"
+        file_path_webvtt = path_data + export_folder + filename_format + ".srt"
         if not utils.terminated_requested and os.path.exists(file_path) and not os.path.exists(file_path_webvtt) and render_webvtt[idx]:
             print("\t- transcribing: " + file_path_webvtt)
             t0 = time.time()
@@ -412,36 +396,19 @@ for idx, user in enumerate(users):
             # open the model
             SetLogLevel(-1)
             sample_rate = 16000
+            # words_per_line = 7
             model = Model(path_model)
             rec = KaldiRecognizer(model, sample_rate)
             rec.SetWords(True)
 
-            # open ffmpeg pipe stream of the audio file (from video)
-            command = ['ffmpeg', '-nostdin', '-loglevel', 'quiet', '-i', file_path,
-                       '-ar', str(sample_rate), '-ac', '1', '-f', 's16le', '-']
-            # process = subprocess.Popen(command, stdout=subprocess.PIPE)
-            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-            results = []
-            while True:
-                data = process.stdout.read(4000)
-                if len(data) == 0:
-                    break
-                if rec.AcceptWaveform(data):
-                    text = rec.Result()
-                    results.append(text)
-            results.append(rec.FinalResult())
+            with subprocess.Popen(["ffmpeg", "-loglevel", "quiet", "-i",
+                            file_path,
+                            "-ar", str(sample_rate) , "-ac", "1", "-f", "s16le", "-"],
+                            stdout=subprocess.PIPE).stdout as stream:
 
-            # convert to standard format
-            vtt = WebVTT()
-            for i, res in enumerate(results):
-                words = json.loads(res).get('result')
-                if not words:
-                    continue
-                for word in words:
-                    start = utils.webvtt_time_string(word['start'])
-                    end = utils.webvtt_time_string(word['end'])
-                    vtt.captions.append(Caption(start, end, word['word']))
-            vtt.save(file_path_webvtt)
+                with open(file_path_webvtt, 'w') as f:
+                    f.write(rec.SrtResult(stream))
+            
             print("\t- done in " + str(time.time() - t0) + " seconds")
 
             # send pushover that this twitch vod is ready to edit
@@ -567,7 +534,7 @@ for idx, user in enumerate(users):
             print("\t- done in " + str(time.time() - t0) + " seconds")
 
         # AUDIO-TO-TEXT: check if file exists
-        file_path_webvtt = path_data + export_folder + filename_format + ".vtt"
+        file_path_webvtt = path_data + export_folder + filename_format + ".srt"
         if not utils.terminated_requested and os.path.exists(file_path) and not os.path.exists(file_path_webvtt) and render_webvtt[idx]:
             print("\t- transcribing: " + file_path_webvtt)
             t0 = time.time()
@@ -575,36 +542,19 @@ for idx, user in enumerate(users):
             # open the model
             SetLogLevel(-1)
             sample_rate = 16000
+            # words_per_line = 7
             model = Model(path_model)
             rec = KaldiRecognizer(model, sample_rate)
             rec.SetWords(True)
 
-            # open ffmpeg pipe stream of the audio file (from video)
-            command = ['ffmpeg', '-nostdin', '-loglevel', 'quiet', '-i', file_path,
-                       '-ar', str(sample_rate), '-ac', '1', '-f', 's16le', '-']
-            # process = subprocess.Popen(command, stdout=subprocess.PIPE)
-            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-            results = []
-            while True:
-                data = process.stdout.read(4000)
-                if len(data) == 0:
-                    break
-                if rec.AcceptWaveform(data):
-                    text = rec.Result()
-                    results.append(text)
-            results.append(rec.FinalResult())
+            with subprocess.Popen(["ffmpeg", "-loglevel", "quiet", "-i",
+                            file_path,
+                            "-ar", str(sample_rate) , "-ac", "1", "-f", "s16le", "-"],
+                            stdout=subprocess.PIPE).stdout as stream:
 
-            # convert to standard format
-            vtt = WebVTT()
-            for i, res in enumerate(results):
-                words = json.loads(res).get('result')
-                if not words:
-                    continue
-                for word in words:
-                    start = utils.webvtt_time_string(word['start'])
-                    end = utils.webvtt_time_string(word['end'])
-                    vtt.captions.append(Caption(start, end, word['word']))
-            vtt.save(file_path_webvtt)
+                with open(file_path_webvtt, 'w') as f:
+                    f.write(rec.SrtResult(stream))
+            
             print("\t- done in " + str(time.time() - t0) + " seconds")
 
             # send pushover that this twitch vod is ready to edit
