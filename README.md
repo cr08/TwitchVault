@@ -5,7 +5,7 @@ Simplified tool to automatically archive VODs, clips, highlights, including asso
 My personal goal has been to find or develop a tool that can not only automate archiving the latest VODs, clips, and highlights from selected Twitch channels, but also archiving the chat logs as they are available for each medium.
 
 ## Install Guide
-0) Ensure __Python 3.6__ minimum is installed.
+0) Ensure __Python 3.6__ *or higher* is installed.
 1) Clone this repository:
     * `git clone https://github.com/cr08/TwitchVault`
 2) Install main python depencies:
@@ -27,7 +27,7 @@ My personal goal has been to find or develop a tool that can not only automate a
       ```
 
 ### Known Issues
-* VTT render produces files with a single word displayed at a time (at least as played via VLC). This needs to be fixed. I may just switch this to SRT as Vosk can natively output this and hopefully it outputs correctly. More testing needed here...
+* None at this time...
 
 ## Credit & Attribution
 
