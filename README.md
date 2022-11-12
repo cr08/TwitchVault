@@ -21,14 +21,17 @@ My personal goal has been to find or develop a tool that can not only automate a
 5) Run scripts as desired:
     * `python3 videos.py`
     * `python3 clips.py`
-6) __Optional__ - Linux targets: Add scripts to crontab using __docs/crontab_script_launcher.sh__
+
+### Optional tasks
+
+* Linux targets: Add scripts to crontab using __docs/crontab_script_launcher.sh__
     * `sudo crontab -e`
     * ```
       */25 * * * * /path/to/repo/docs/crontab_script_launcher.sh videos.py
       * */12 * * * /path/to/repo/docs/crontab_script_launcher.sh clips.py
       ```
-7) __Optional__ - For SRT chat transcription: Download [Vosk Speech Recognition model](https://alphacephei.com/vosk/models) and extract to __./thirdparty/__, pointing `path_model` variable in __videos.py_ to this folder.
-    * `vosk-model-small-en-us-<ver>` highly recommended for English speaking content and is reference by default. Low resource and decent accuracy. Full size models in testing have high resource usage requirements (6GB+ free RAM and a high end CPU). These can be used at your own discretion but support will be limited here.
+* For SRT chat transcription: Download [Vosk Speech Recognition model](https://alphacephei.com/vosk/models) and extract to __./thirdparty/__, pointing `path_model` variable in __videos.py_ to this folder.
+    * `vosk-model-small-en-us-<ver>` highly recommended for English speaking content and is referenced by default. Low resource usage and decent accuracy. Full size models in testing have high resource usage requirements (6GB+ free RAM and a high end CPU). These can be used at your own discretion but support will be limited here.
 
 ### Known Issues
 * None at this time...
