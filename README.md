@@ -5,7 +5,7 @@ Simplified tool to automatically archive VODs, clips, highlights, including asso
 My personal goal has been to find or develop a tool that can not only automate archiving the latest VODs, clips, and highlights from selected Twitch channels, but also archiving the chat logs as they are available for each medium.
 
 [goldbattle's](https://github.com/goldbattle) [Twitch VOD Creator](https://github.com/goldbattle/twitch_vod_creator) had everything needed to accomplish this with just a little bit of unneeded cruft on top. This repo has been heavily modified from that and slimmed down to the core functions: Automatically download available VODs, highlights, uploads, and clips for selected channels. Additionally the added ability to download chat logs for each video, optionally rendering the chat to video through TwitchDownloaderCLI's render function. As a bonus, Speech-to-Text exists from the original code via the Vosk speech recognition API. This has been maintained with this fork as an optional tool.
-
+***
 ## Install Guide
 0) Ensure __Python 3.6__ *or higher* is installed.
 1) Clone this repository:
@@ -23,7 +23,6 @@ My personal goal has been to find or develop a tool that can not only automate a
     * `python3 clips.py`
 
 ### Optional tasks
-
 * Linux targets: Add scripts to crontab using __docs/crontab_script_launcher.sh__
     * `sudo crontab -e`
     * ```
@@ -32,7 +31,7 @@ My personal goal has been to find or develop a tool that can not only automate a
       ```
 * For SRT chat transcription: Download [Vosk Speech Recognition model](https://alphacephei.com/vosk/models) and extract to __./thirdparty/__, pointing `path_model` variable in __videos.py_ to this folder.
     * `vosk-model-small-en-us-<ver>` highly recommended for English speaking content and is referenced by default. Low resource usage and decent accuracy. Full size models in testing have high resource usage requirements (6GB+ free RAM and a high end CPU). These can be used at your own discretion but support will be limited here.
-
+***
 ### Known Issues
 * None at this time...
 
