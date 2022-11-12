@@ -49,7 +49,13 @@ path_twitch_cli = path_base + tdcli
 path_root = videos["video_downloads"]
 badchat_log = videos["video_downloads"] + "badchat.videos"
 path_temp = videos["video_temp"]
+
+# Vosk speech recognition models - 'Small' English model selected by default and recommended.
+#   'Large' model can be used on a system with enough resources including minimum 6GB RAM
+#   free or more and a high end processor.
+
 path_model = path_base + "/thirdparty/vosk-model-small-en-us-0.15/"
+#path_model = path_base + "/thirdparty/vosk-model-en-us-0.22/"
 
 # ================================================================
 # ================================================================
@@ -255,7 +261,7 @@ for idx, user in enumerate(users):
             rec = KaldiRecognizer(model, sample_rate)
             rec.SetWords(True)
 
-            with subprocess.Popen(["ffmpeg", "-loglevel", "quiet", "-i",
+            with subprocess.Popen([ffmpeg_path, "-loglevel", "quiet", "-i",
                             file_path,
                             "-ar", str(sample_rate) , "-ac", "1", "-f", "s16le", "-"],
                             stdout=subprocess.PIPE).stdout as stream:
@@ -401,7 +407,7 @@ for idx, user in enumerate(users):
             rec = KaldiRecognizer(model, sample_rate)
             rec.SetWords(True)
 
-            with subprocess.Popen(["ffmpeg", "-loglevel", "quiet", "-i",
+            with subprocess.Popen([ffmpeg_path, "-loglevel", "quiet", "-i",
                             file_path,
                             "-ar", str(sample_rate) , "-ac", "1", "-f", "s16le", "-"],
                             stdout=subprocess.PIPE).stdout as stream:
@@ -547,7 +553,7 @@ for idx, user in enumerate(users):
             rec = KaldiRecognizer(model, sample_rate)
             rec.SetWords(True)
 
-            with subprocess.Popen(["ffmpeg", "-loglevel", "quiet", "-i",
+            with subprocess.Popen([ffmpeg_path, "-loglevel", "quiet", "-i",
                             file_path,
                             "-ar", str(sample_rate) , "-ac", "1", "-f", "s16le", "-"],
                             stdout=subprocess.PIPE).stdout as stream:
