@@ -10,8 +10,6 @@ __pycache__/
 # data folder during debugging
 data/
 
-# ignore TwitchDownloaderCLI files - Don't want these stored in the repo any longer
-thirdparty/TwitchDownloaderCLI*
+# ignore thirdparty files - Don't want these stored in the repo any longer
+thirdparty/*
 test.py
-
-thirdparty/vosk-model-en-us-0.22
