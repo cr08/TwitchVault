@@ -2,9 +2,6 @@
 
 python-twitch-client >= 0.7.1 
 PyYAML
-youtube-video-upload
-youtube_dl
 static-ffmpeg
-webvtt-py
 vosk
 discord-webhook
