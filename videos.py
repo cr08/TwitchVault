@@ -2,7 +2,6 @@
 
 import twitch  # pip install python-twitch-client
 import yaml  # pip install PyYAML
-from webvtt import WebVTT, Caption  # pip install webvtt-py
 from vosk import Model, KaldiRecognizer, SetLogLevel  # pip install vosk
 from discord_webhook import DiscordWebhook # pip install discord-webhook
 

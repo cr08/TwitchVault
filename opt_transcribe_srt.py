@@ -9,7 +9,6 @@ import subprocess
 import utils
 import datetime
 import shutil
-from webvtt import WebVTT, Caption  # pip install webvtt-py
 from vosk import Model, KaldiRecognizer, SetLogLevel  # pip install vosk
 
 
