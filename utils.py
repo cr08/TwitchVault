@@ -185,7 +185,7 @@ def send_pushover_message(auth, text):
             print("[error]: bad response from pushover: ")
             print(resp)
 
-def cleanFilename(sourcestring,  removestring ="/<>\:\"\\|?*"):
+def cleanFilename(sourcestring,  removestring ="\`/<>\:\"\\|?*"):
     return ''.join([c for c in sourcestring if c not in removestring])
 
 def checkBadChat(id, type, path):
