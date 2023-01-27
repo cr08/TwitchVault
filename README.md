@@ -13,9 +13,10 @@ My personal goal has been to find or develop a tool that can not only automate a
 2) Install main python dependencies:
     * `python3 -m pip install --user -r requirements.txt`
 3) Download and place [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader/releases) for your platform into __/thirdparty__
-    * Latest release recommended, minimum __1.50.6__ required as it fixes a chat download issue
+    * Latest release recommended, minimum __1.50.7__ required. Code has been updated to use new mode syntax introduced in this version.
     * Ensure TwitchDownloaderCLI is set as executable. This may be necessary on \*nix platforms
         * `chmod +x thirdparty/TwitchDownloaderCLI`
+        * If on a stripped distro such as an LXC container, ensure to install the available __libicuXX__ package available as it appears to be required by TDCLI.
 4) Copy and fill out all __config/\*.yaml.example__ files as necessary.
     * An application needs to be registered with Twitch from the [Twitch Dev console](https://dev.twitch.tv/) - client ID and secret need to be entered into __config/config.yaml__
 5) Run scripts as desired:
@@ -23,7 +24,8 @@ My personal goal has been to find or develop a tool that can not only automate a
     * `python3 clips.py`
 
 ### Optional tasks
-* Linux targets: Add scripts to crontab using __docs/crontab_script_launcher.sh__
+* Linux targets: Add scripts to crontab using __docs/crontab_script_launcher.sh__ and ensure to mark the launcher script executable
+    * `chmod +x ./docs/crontab_script_launcher.sh`
     * `sudo crontab -e`
     * ```
       */25 * * * * /path/to/repo/docs/crontab_script_launcher.sh videos.py

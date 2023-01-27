@@ -184,8 +184,8 @@ for idx, user in enumerate(users):
 
             if not utils.terminated_requested and not os.path.exists(file_path):
                 print("\t- download clip: " + str(video['id']))
-                cmd = path_twitch_cli + ' -m ClipDownload' \
-                      + ' --id ' + str(video['id']) + ' --ffmpeg-path "' + ffmpeg_path + '"' \
+                cmd = path_twitch_cli + ' clipdownload' \
+                      + ' --id ' + str(video['id']) \
                       + ' -o ' + file_path_tmp
                       #+ ' --temp-path "' + path_root + '/TEMP/" --quality 1080p60 -o ' + file_path
                 # print("\t- CMD: " + str(cmd))
@@ -203,9 +203,9 @@ for idx, user in enumerate(users):
             else:
                 if not utils.terminated_requested:
                     print("\t- download chat: " + str(video['id']) + "_chat.json")
-                    cmd = path_twitch_cli + ' -m ChatDownload' \
-                          + ' --id ' + str(video['id']) + ' --ffmpeg-path "' + ffmpeg_path + '"' \
-                          + ' --embed-emotes' + ' -o ' + file_path_chat_tmp
+                    cmd = path_twitch_cli + ' chatdownload' \
+                          + ' --id ' + str(video['id']) \
+                          + ' -E' + ' -o ' + file_path_chat_tmp
                     # print("\t- CMD: " + str(cmd))
 
                     # Attempt to download chat log. If it does not exist, TDCLI will produce a non-zero exit code. We create a placeholder file with a .BAD extension to bypass future file checks
@@ -235,7 +235,7 @@ for idx, user in enumerate(users):
         #     file_path_render = path_data + str(video['id']) + "_chat.mp4"
         #     print("\t- rendering: " + file_path_render)
         #     if os.path.exists(file_path_chat) and not os.path.exists(file_path_render):
-        #         cmd = path_twitch_cli + ' -m ChatRender' \
+        #         cmd = path_twitch_cli + ' chatrender' \
         #               + ' -i ' + file_path_chat + ' --ffmpeg-path "' + path_twitch_ffmpeg + '"' \
         #               + ' -h 1080 -w 320 --framerate 60 --font-size 13' \
         #               + ' -o ' + file_path_render
