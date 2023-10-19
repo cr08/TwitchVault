@@ -188,8 +188,6 @@ def send_pushover_message(auth, text):
 def cleanFilename(sourcestring,  removestring ="\!\"\#\$\&\'\(\)\*\;\<\=\>\?\[\\\]\^\`\{\|\}\~\/\:"):
     return ''.join([c for c in sourcestring if c not in removestring])
 
-\!\"\#\$\&\'\(\)\*\;\<\=\>\?\[\\\]\^\`\{\|\}\~\/\:
-
 def checkBadChat(id, type, path):
     if type == "videos":
         fpath = path
